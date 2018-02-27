@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+                        "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+ <tlibversion>1.2</tlibversion>
+ <jspversion>1.1</jspversion>
+ <shortname>pager taglib</shortname>
+ <uri>http://www.servletsuite.com/servlets/buttag</uri>
+ <info>Pager taglib</info>
+ <tag>
+  <name>option</name>
+  <tagclass>com.util.taglib.cms.CmsDataListTagLib</tagclass>
+  <bodycontent>JSP</bodycontent>
+  <info>HTML pager</info>
+   <attribute>
+   <name>scope</name>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>columnid</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>length</name>
+   <required>true</required>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>pagesize</name>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>orderby</name>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>classname</name>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+  <attribute>
+   <name>url</name>
+   <rtexprvalue>true</rtexprvalue>
+  </attribute>
+ </tag>
+</taglib>

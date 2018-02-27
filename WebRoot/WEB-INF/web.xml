@@ -1,0 +1,130 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+     version="2.5">
+  <display-name>WebRoot</display-name>	
+   <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:/log4j.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>pursol.root</param-value>
+    </context-param>
+     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:/config/spring/applicationContext-*.xml
+        </param-value>
+    </context-param>
+     <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    
+     <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>cn.pursol.sys.web.action.SkinActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>
+                /WEB-INF/classes/config/struts/struts-config.xml,
+                <!-- /WEB-INF/classes/config/struts/struts-config-ntk.xml -->
+                </param-value>
+        </init-param>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>2</param-value>
+        </init-param>
+        <init-param>
+            <param-name>application</param-name>
+            <param-value>
+                classpath:/config/prop/ApplicationResources
+            </param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.fo</url-pattern>
+    </servlet-mapping>
+    
+     <taglib>
+  <taglib-uri>JSTL_BEAN</taglib-uri>
+  <taglib-location>/WEB-INF/classes/config/tld/struts-bean.tld</taglib-location>
+ </taglib>
+<taglib>
+  <taglib-uri>JSTL_HTML</taglib-uri>
+  <taglib-location>/WEB-INF/classes/config/tld/struts-html.tld</taglib-location>
+ </taglib>
+<taglib>
+  <taglib-uri>JSTL_LOGIC</taglib-uri>
+  <taglib-location>/WEB-INF/classes/config/tld/struts-logic.tld</taglib-location>
+ </taglib>
+<taglib>
+  <taglib-uri>JSTL_PAGE</taglib-uri>
+  <taglib-location>/WEB-INF/classes/config/tld/java2pub-page.tld</taglib-location>
+ </taglib>
+<taglib>
+  <taglib-uri>JSTL_CODE</taglib-uri>
+  <taglib-location>/WEB-INF/classes/config/tld/java2pub-code.tld</taglib-location>
+ </taglib>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/400.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error_ServletException.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/maintenance.html</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.servle.ServletException</exception-type>
+        <location>/error_ServletException.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type>
+        <location>/error_NullPointerException.jsp</location>
+    </error-page>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

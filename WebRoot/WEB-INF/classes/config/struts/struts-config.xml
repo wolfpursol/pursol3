@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+    <form-beans>
+       <form-bean name="userActionForm" type="cn.pursol.test.web.form.UserActionForm" />
+       <form-bean name="articleActionForm" type="cn.pursol.test.web.form.ArticleActionForm" />
+       <form-bean name="classifyActionForm" type="cn.pursol.test.web.form.ClassifyActionForm" />
+       <form-bean name="sysUserLogActionForm" type="cn.pursol.sys.web.form.SysUserLogActionForm" />
+    </form-beans>
+     <global-forwards>
+        <forward name="failure" path="/sys/comm/failure.jsp"
+            contextRelative="true" />
+        <forward name="success" path="/sys/comm/success.jsp"
+            contextRelative="true" />
+        <forward name="welcome" path="/index.fo" contextRelative="true" />
+    </global-forwards>
+    <action-mappings>
+        <action name="userActionForm" parameter="method" path="/userAction" scope="request" type="cn.pursol.test.web.action.UserAction" validate="false">
+			<forward contextRelative="true" name="list" path="/test/userlist.jsp"/>
+			<forward contextRelative="true" name="edit" path="/test/add.jsp"/>
+			<forward contextRelative="true" name="OK" path="/test/OK.jsp"/>
+			<forward contextRelative="true" name="error" path="/test/error.jsp"/>
+			<forward contextRelative="true" name="statics" path="/test/statics.jsp"/>
+		</action>
+		<action name="sysUserLogActionForm" parameter="method" path="/sysUserLogAction" scope="request" type="cn.pursol.sys.web.action.SysUserLogAction" validate="false">
+			<forward contextRelative="true" name="list" path=""/>
+			<forward contextRelative="true" name="edit" path=""/>
+		</action>
+		<action name="articleActionForm" parameter="method" path="/articleAction" scope="request" type="cn.pursol.test.web.action.ArticleAction" validate="false">
+			<forward contextRelative="true" name="list" path=""/>
+			<forward contextRelative="true" name="edit" path=""/>
+		</action>
+		<action name="classifyActionForm" parameter="method" path="/classifyAction" scope="request" type="cn.pursol.test.web.action.ClassifyAction" validate="false">
+			<forward contextRelative="true" name="list" path=""/>
+			<forward contextRelative="true" name="edit" path=""/>
+		</action>
+    </action-mappings>
+</struts-config>

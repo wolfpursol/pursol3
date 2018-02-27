@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+    <action-mappings>
+        <!-- <action name="userActionForm" parameter="method" path="/userAction" scope="request" type="cn.pursol.test.web.action.UserAction" validate="false">
+			<forward contextRelative="true" name="list" path="/test/userlist.jsp"/>
+			<forward contextRelative="true" name="edit" path=""/>
+		</action> -->
+		<action path="/login" parameter="method" scope="request" type="cn.pursol.sys.web.action.SkinIndexAction" validate="false"/>
+   
+    </action-mappings>
+</struts-config>

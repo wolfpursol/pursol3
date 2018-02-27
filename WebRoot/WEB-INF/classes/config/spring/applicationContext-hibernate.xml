@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${hibernate.connection.driver_class}</value>
+		</property>
+		<property name="url">
+			<value>${hibernate.connection.url}</value>
+		</property>
+		<property name="username">
+			<value>${hibernate.connection.username}</value>
+		</property>
+		<property name="password">
+			<value>${hibernate.connection.password}</value>
+		</property>
+		<property name="maxActive">
+			<value>1800</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>1800000</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>1800000</value>
+		</property>
+        <property name="validationQuery">
+			<value>SELECT 1</value>
+		</property>
+        <property name="testOnBorrow">
+			<value>true</value>
+		</property>
+	</bean>
+
+	<bean name="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.dialect">
+					${hibernate.dialect}
+				</prop>
+				<prop key="hibernate.dialect">
+				     cn.pursol.util.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.show_sql">
+					${hibernate.show_sql}
+				</prop>
+				<prop key="hibernate.default_batch_fetch_size">30</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+				<prop key="hibernate.query.factory_class">
+					org.hibernate.hql.ast.ASTQueryTranslatorFactory
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:/cn/pursol/test/bo/mappings/</value>
+				<!-- <value>classpath:/com/bzt/bbs/bo/mappings/</value> -->
+				
+			</list>
+		</property>
+		<property name="hibernateProperties" ref="hibernateProperties" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="userManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="cn.pursol.test.service.impl.UserManagerImpl">
+				<property name="baseDAO" ref="baseDAO"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="articleManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="cn.pursol.test.service.impl.ArticleManagerImpl">
+				<property name="baseDAO" ref="baseDAO"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="classifyManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="cn.pursol.test.service.impl.ClassifyManagerImpl">
+				<property name="baseDAO" ref="baseDAO"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="sysUserLogManager" parent="txProxyTemplate">
+		<property name="target">
+			<bean class="cn.pursol.sys.service.impl.SysUserLogManagerImpl">
+				<property name="baseDAO" ref="baseDAO"/>
+			</bean>
+		</property>
+	</bean>
+	<bean id="txProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="baseDAO"
+		class="com.util.dao.hibernate.BaseDAOHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="cn.pursol.sys.bo.SysUserLog" table="SYS_USER_LOG">
+<id name="logid" type="java.lang.Integer" column="logid">  <generator class="native" /> </id>
+<property  name="userip" type="java.lang.String" column="userip"/>
+<property  name="createdate" type="java.lang.String" column="createdate"/>
+<property  name="descript" type="java.lang.String" column="descript"/>
+<property  name="userid" type="java.lang.String" column="userid"/>
+</class>
+</hibernate-mapping>
